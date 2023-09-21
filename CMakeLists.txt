@@ -9,8 +9,8 @@ add_executable(OOP
         src/PlayerController/PlayerController.h
         src/Observer/Observer.cpp
         src/Observer/Observer.h
-        src/Observerable/Observable.cpp
-        src/Observerable/Observable.h
+        src/Observable/Observable.cpp
+        src/Observable/Observable.h
         src/Player/Player.cpp
         src/Player/Player.h
         src/PlayerController/PlayerController.cpp

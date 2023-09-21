@@ -3,7 +3,7 @@
 
 
 #include <string>
-#include "../Observerable/Observable.h"
+#include "../Observable/Observable.h"
 
 class Player : public Observable {
 public:
