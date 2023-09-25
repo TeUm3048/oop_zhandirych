@@ -8,10 +8,12 @@
 
 class PlayerView : Observer {
 private:
-    Player *_player;
+    Player &_player;
 
 public:
-    PlayerView(Player *player);
+    //    The `explicit` keyword is used to prevent implicit conversions.
+
+    explicit PlayerView(Player &player);
 
     ~PlayerView();
 

@@ -6,14 +6,21 @@
 
 class PlayerController {
 public:
-    PlayerController(Player *player);
+
+//  The `explicit` keyword is used to prevent implicit conversions.
+//  In this case, it is used in the constructor of the `PlayerController` class
+//  to prevent implicit conversions from the `Player` class to `PlayerController`.
+//  This means that when creating a `PlayerController` object,
+//  you must explicitly pass a `Player` object as an argument to the constructor.
+
+    explicit PlayerController(Player &player);
 
     ~PlayerController();
 
     void start();
 
 private:
-    Player *_player;
+    Player &_player;
 };
 
 

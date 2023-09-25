@@ -5,9 +5,8 @@
 #include "PlayerView.h"
 #include "../Player/Player.h"
 
-PlayerView::PlayerView(Player *player) {
-    this->_player = player;
-    this->_player->addObserver(this);
+PlayerView::PlayerView(Player &player) : _player(player) {
+    _player.addObserver(this);
 }
 
 PlayerView::~PlayerView() {

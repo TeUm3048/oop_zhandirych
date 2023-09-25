@@ -1,8 +1,7 @@
 #include <iostream>
 #include "PlayerController.h"
 
-PlayerController::PlayerController(Player *player) {
-    this->_player = player;
+PlayerController::PlayerController(Player &player) : _player(player) {
 }
 
 PlayerController::~PlayerController() {
