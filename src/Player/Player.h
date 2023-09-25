@@ -25,6 +25,14 @@ public:
 
     bool isAlive();
 
+    void setX(int x_);
+
+    int getX() const;
+
+    void setY(int y_);
+
+    int getY() const;
+
 private:
     std::string name;
     unsigned HP;

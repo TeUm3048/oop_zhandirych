@@ -20,8 +20,9 @@ Player::~Player() {
 
 void Player::setName(std::string name) {
     if (name.length() < 4 || name.length() > 30) {
-        throw std::invalid_argument("The name should be no shorter than 4 characters"
-                                    "and no longer than 30 characters");
+        throw std::invalid_argument(
+                "The name should be no shorter than 4 characters"
+                "and no longer than 30 characters");
     }
 
     this->name = name;

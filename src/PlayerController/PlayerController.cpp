@@ -9,8 +9,18 @@ PlayerController::~PlayerController() {
 
 void PlayerController::start() {
     std::string name;
-    std::cout << "Enter your nickname: ";
-    std::cin >> name;
+
+    bool nameIsSet = false;
+    while (!nameIsSet) {
+        std::cout << "Enter your nickname: ";
+        std::cin >> name;
+        try {
+            _player.setName(name);
+            nameIsSet = true;
+        } catch (const std::invalid_argument &e) {
+            std::cout << e.what() << '\n';
+        }
+    }
 
 
     _player->setName(name);
