@@ -7,8 +7,8 @@ void Observable::addObserver(Observer *observer) {
 }
 
 void Observable::notifyUpdate() {
-    int size = this->_observers.size();
-    for (int i = 0; i < size; i++) {
+    size_t size = this->_observers.size();
+    for (size_t i = 0; i < size; i++) {
         this->_observers[i]->update();
     }
 }
