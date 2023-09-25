@@ -9,8 +9,6 @@ class Player : public Observable {
 public:
     Player();
 
-    Player(std::string name);
-
     ~Player();
 
     void setName(std::string name);

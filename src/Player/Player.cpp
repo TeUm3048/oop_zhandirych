@@ -1,6 +1,5 @@
-#include <stdexcept>
-#include <utility>
 #include "Player.h"
+#include <stdexcept>
 
 Player::Player() {
     this->name = "<UNKNOWN_PLAYER>";
