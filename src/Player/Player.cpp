@@ -7,13 +7,6 @@ Player::Player() {
     this->HP = 100;
 }
 
-Player::Player(std::string name) {
-    this->setName(std::move(name));
-
-
-    this->HP = 100;
-}
-
 Player::~Player() {
 }
 
