@@ -40,3 +40,11 @@ void Player::setHP(unsigned HP) {
 unsigned Player::getHP() const {
     return this->HP;
 }
+
+bool Player::isDead() {
+    return !this->isAlive();
+}
+
+bool Player::isAlive() {
+    return this->HP > 0;
+}

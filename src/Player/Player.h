@@ -21,6 +21,10 @@ public:
 
     unsigned getHP() const;
 
+    bool isDead();
+
+    bool isAlive();
+
 private:
     std::string name;
     unsigned HP;

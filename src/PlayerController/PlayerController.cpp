@@ -17,6 +17,6 @@ void PlayerController::start() {
     unsigned temp = 0;
     do {
         std::cin >> temp;
-        _player->setHP(temp);
-    } while (temp != 0);
+        _player.setHP(temp);
+    } while (_player.isAlive());
 }
