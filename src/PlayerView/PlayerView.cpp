@@ -12,9 +12,15 @@ PlayerView::PlayerView(Player &player) : _player(player) {
 PlayerView::~PlayerView() {
 }
 
-void PlayerView::update() {
+void PlayerView::renderPlayer() {
     system("cls");
-    std::cout << "Player: " << _player->getName() << "\n";
-    std::cout << "HP: " << _player->getHP() << "\n";
-    std::cout << "Enter new HP: ";
+    std::cout << "Player: " << _player.getName() << std::endl;
+    std::cout << "Player position:" << std::endl;
+    std::cout << "\t X:" << _player.getX() << std::endl;
+    std::cout << "\t Y:" << _player.getY() << std::endl;
+    std::cout << "HP: " << _player.getHP() << "\n";
+}
+
+void PlayerView::update() {
+    PlayerView::renderPlayer();
 }

@@ -24,6 +24,7 @@ void PlayerController::start() {
 
     unsigned temp = 0;
     do {
+        std::cout << "Enter new HP: ";
         std::cin >> temp;
         _player.setHP(temp);
     } while (_player.isAlive());
