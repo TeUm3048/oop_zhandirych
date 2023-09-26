@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <iostream>
 #include "PlayerView.h"
-#include "../Player/Player.h"
 
 PlayerView::PlayerView(Player &player) : _player(player) {
     _player.addObserver(this);
