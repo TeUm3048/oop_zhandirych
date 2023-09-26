@@ -22,11 +22,22 @@ void PlayerController::start() {
         }
     }
 
-
-    _player->setName(name);
     unsigned temp = 0;
     do {
         std::cin >> temp;
         _player.setHP(temp);
     } while (_player.isAlive());
+}
+
+void PlayerController::playerMove(Direction direction) {
+    switch (direction) {
+        case Direction::Up:
+            _player.setY(_player.getY() + 1);
+        case Direction::Down:
+            _player.setY(_player.getY() - 1);
+        case Direction::Left:
+            _player.setX(_player.getX() - 1);
+        case Direction::Right:
+            _player.setX(_player.getX() + 1);
+    }
 }

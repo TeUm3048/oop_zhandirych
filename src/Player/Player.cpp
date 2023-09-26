@@ -41,3 +41,22 @@ bool Player::isDead() {
 bool Player::isAlive() {
     return this->HP > 0;
 }
+
+
+void Player::setX(int x_) {
+    x = x_;
+    this->notifyUpdate();
+}
+
+int Player::getX() const {
+    return x;
+}
+
+void Player::setY(int y_) {
+    y = y_;
+    this->notifyUpdate();
+}
+
+int Player::getY() const {
+    return y;
+}

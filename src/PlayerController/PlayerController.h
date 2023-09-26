@@ -1,8 +1,11 @@
 #ifndef OOP_PLAYERCONTROLLER_H
 #define OOP_PLAYERCONTROLLER_H
 
-
 #include "../Player/Player.h"
+
+enum Direction {
+    Up, Right, Down, Left
+};
 
 class PlayerController {
 public:
@@ -19,9 +22,11 @@ public:
 
     void start();
 
+protected:
+    void playerMove(Direction direction);
+
 private:
     Player &_player;
 };
-
 
 #endif //OOP_PLAYERCONTROLLER_H

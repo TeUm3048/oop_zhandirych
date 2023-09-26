@@ -34,11 +34,15 @@ public:
 private:
     std::string name;
     unsigned HP;
-// ? Add the following fields?
-//	unsigned EXP;
-//	int attack;
-//	int defense;
-//	unsigned level;
+    int x = 0;
+    int y = 0;
+
+
+    // ? Add the following fields?
+    //	unsigned EXP;
+    //	int attack;
+    //	int defense;
+    //	unsigned level;
 };
 
 
