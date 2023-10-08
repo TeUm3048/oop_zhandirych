@@ -3,9 +3,18 @@
 Title: Class diagram
 ---
 classDiagram
+    class Coordinate {
+        <<stract>>
+        + x: int
+        + y: int
+    }
     class PlayerController {
         +start()
         -Player
+        -Field
+        +changeField()
+        #playerMove()
+        #canMove()
     }
     class Observable {
         <<interface>>
@@ -38,23 +47,31 @@ classDiagram
         +renderPlayer()
     }
     class Directions {
-        <<Enumeration>>
+        <<enumeration>>
         Up, Right, Down, Left
     }
     class FieldCell {
         -occupied
-        -Event[]
+        -*Event
         +isOccupied()
         +setOccupied()
         +removeOccupied()
+        +getEvent()
         +addEvent()
-        +notifyEventHandle()
     }
     class Field {
         -FieldCell[][]
-        -start
-        -finish
+        -start: Coordinate
+        -finish: Coordinate
+        -width
+        -height
+        +getWidth()
+        +getHeight()
+        +getStart() -> Coordinate
+        +getFinish() -> Coordinate
         +getFieldCeil()
+        +validateCoordinate()
+        +validateSize()
     }
 
     class Event {
@@ -89,8 +106,9 @@ classDiagram
     PlayerView o-- "1" Player
     PlayerController o--> "1" Player
     Field "1" *-- "1..*" FieldCell
-    PlayerController -- "1" Field: canMove()
+    PlayerController *-- "1" Field: canMove()
     FieldCell o-- Event
+    
     BuffEvent ..|> Event
     DeduffEvent ..|> Event
     TeleportPlayerEvent ..|> Event
