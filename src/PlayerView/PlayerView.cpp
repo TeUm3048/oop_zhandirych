@@ -8,8 +8,7 @@ PlayerView::PlayerView(Player &player) : _player(player) {
     _player.addObserver(this);
 }
 
-PlayerView::~PlayerView() {
-}
+PlayerView::~PlayerView() = default;
 
 void PlayerView::renderPlayer() {
     system("cls");
