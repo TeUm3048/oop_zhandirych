@@ -2,6 +2,7 @@
 #define OOP_PLAYERCONTROLLER_H
 
 #include "../Player/Player.h"
+#include "../Field/Field.h"
 
 enum Direction {
     Up, Right, Down, Left
@@ -18,15 +19,25 @@ public:
 
     explicit PlayerController(Player &player);
 
+    explicit PlayerController(Player &player, Field &field);
+
     ~PlayerController();
 
     void start();
 
+    void changeField(Field &field);
+
 protected:
     void playerMove(Direction direction);
 
+    [[nodiscard]] bool canMove(int x, int y);
+
+    [[nodiscard]] bool canMove(Coordinate coord);
+
 private:
     Player &_player;
+    Field _field;
+
 };
 
 #endif //OOP_PLAYERCONTROLLER_H

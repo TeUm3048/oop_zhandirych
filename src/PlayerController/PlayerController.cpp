@@ -1,7 +1,12 @@
 #include <iostream>
 #include "PlayerController.h"
 
-PlayerController::PlayerController(Player &player) : _player(player) {
+PlayerController::PlayerController(Player &player) : _player(player),
+                                                     _field(Field()) {
+}
+
+PlayerController::PlayerController(Player &player, Field &field) : _player(
+        player), _field(field) {
 }
 
 PlayerController::~PlayerController() {
@@ -31,14 +36,34 @@ void PlayerController::start() {
 }
 
 void PlayerController::playerMove(Direction direction) {
+    Coordinate new_coord{};
     switch (direction) {
         case Direction::Up:
-            _player.setY(_player.getY() + 1);
+            new_coord = {_player.getX(), _player.getY() + 1};
+            break;
         case Direction::Down:
-            _player.setY(_player.getY() - 1);
+            new_coord = {_player.getX(), _player.getY() - 1};
+            break;
         case Direction::Left:
-            _player.setX(_player.getX() - 1);
+            new_coord = {_player.getX() - 1, _player.getY()};
+            break;
         case Direction::Right:
-            _player.setX(_player.getX() + 1);
+            new_coord = {_player.getX() + 1, _player.getY()};
+            break;
     }
+    if (canMove(new_coord))
+        _player.setCoordinate(new_coord);
 }
+
+void PlayerController::changeField(Field &field) {
+    _field = field;
+}
+
+bool PlayerController::canMove(int x, int y) {
+    return !_field.getFieldCeil(x, y).isOccupied();
+}
+
+bool PlayerController::canMove(Coordinate coord) {
+    return canMove(coord.x, coord.y);
+}
+

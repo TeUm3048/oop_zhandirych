@@ -44,19 +44,33 @@ bool Player::isAlive() {
 
 
 void Player::setX(int x_) {
-    x = x_;
+    coordinate.x = x_;
     this->notifyUpdate();
 }
 
 int Player::getX() const {
-    return x;
+    return coordinate.x;
 }
 
 void Player::setY(int y_) {
-    y = y_;
+    coordinate.y = y_;
     this->notifyUpdate();
 }
 
 int Player::getY() const {
-    return y;
+    return coordinate.y;
+}
+
+void Player::setCoordinate(Coordinate coordinate_) {
+    coordinate = coordinate_;
+    notifyUpdate();
+
+}
+
+void Player::setCoordinate(int x_, int y_) {
+    setCoordinate({x_, y_});
+}
+
+Coordinate Player::getCoordinate() {
+    return coordinate;
 }

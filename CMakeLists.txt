@@ -17,4 +17,11 @@ add_executable(OOP
         src/PlayerController/PlayerController.h
         src/PlayerView/PlayerView.cpp
         src/PlayerView/PlayerView.h
-        src/main.cpp)
+        src/main.cpp
+        src/FieldCell/FieldCell.cpp
+        src/FieldCell/FieldCell.h
+        src/Field/Field.cpp
+        src/Field/Field.h
+        src/Coordinate/Coordinate.h
+        src/Event/Event.cpp
+        src/Event/Event.h)

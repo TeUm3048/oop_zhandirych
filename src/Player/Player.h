@@ -4,8 +4,9 @@
 
 #include <string>
 #include "../Observable/Observable.h"
+#include "../Coordinate/Coordinate.h"
 
-class Player : public Observable {
+class Player : public virtual Observable {
 public:
     Player();
 
@@ -31,12 +32,17 @@ public:
 
     int getY() const;
 
+    void setCoordinate(Coordinate coordinate);
+
+    void setCoordinate(int x, int y);
+
+    Coordinate getCoordinate();
+
 private:
     std::string name;
     unsigned HP;
-    int x = 0;
-    int y = 0;
 
+    Coordinate coordinate{0, 0};
 
     // ? Add the following fields?
     //	unsigned EXP;
