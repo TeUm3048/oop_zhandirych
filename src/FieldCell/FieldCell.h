@@ -11,7 +11,6 @@
 class FieldCell {
 private:
     bool occupied;
-    Event *event;
 public:
 
     explicit FieldCell(bool occupied_ = false);
@@ -19,10 +18,6 @@ public:
     FieldCell(const FieldCell &other);
 
     FieldCell &operator=(const FieldCell &other);
-
-    Event *getEvent();
-
-    void addEvent(Event *event);
 
     void removeOccupied();
 

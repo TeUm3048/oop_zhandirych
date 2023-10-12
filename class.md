@@ -72,9 +72,9 @@ classDiagram
         +validateCoordinate()
         +validateSize()
     }
-    class Event {
-        <<interface>>
-    }
+%%    class Event {
+%%        <<interface>>
+%%    }
 
     Player ..|> Observable
     Observer "*" -- "*" Observable: notifyUpdate()
@@ -83,6 +83,6 @@ classDiagram
     PlayerController o--> "1" Player
     Field "1" *-- "1..*" FieldCell
     PlayerController *-- "1" Field: canMove()
-    FieldCell o-- Event
+%%    FieldCell o-- Event
 
 ```

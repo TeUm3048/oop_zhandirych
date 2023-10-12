@@ -14,14 +14,12 @@ FieldCell &FieldCell::operator=(const FieldCell &other) {
         return *this;
     }
     this->occupied = other.occupied;
-    this->event = other.event;
     return *this;
 }
 
 // new_field_cell = FieldCell(old_cell);
 FieldCell::FieldCell(const FieldCell &other) {
     this->occupied = other.occupied;
-    this->event = other.event;
 }
 
 void FieldCell::removeOccupied() {
@@ -36,10 +34,3 @@ bool FieldCell::isOccupied() const {
     return occupied;
 }
 
-Event *FieldCell::getEvent() {
-    return event;
-}
-
-void FieldCell::addEvent(Event *event_) {
-    this->event = event_;
-}
