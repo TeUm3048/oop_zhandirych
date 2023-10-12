@@ -29,8 +29,7 @@ classDiagram
     class Player {
         -name
         -HP: unsigned
-        -x: int
-        -y: int
+        -Coordinate
         +setName(name)
         +getName()
         +setHP(unsigned HP)

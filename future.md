@@ -1,3 +1,5 @@
+# Будущее
+
 ```mermaid
 ---
 Title: Class diagram
@@ -29,8 +31,7 @@ classDiagram
     class Player {
         -name
         -HP: unsigned
-        -x: int
-        -y: int
+        -Coordinate
         +setName(name)
         +getName()
         +setHP(unsigned HP)
@@ -45,6 +46,8 @@ classDiagram
     class PlayerView {
         -Player
         +renderPlayer()
+        +renderGame()
+        +renderField()
     }
     class Directions {
         <<enumeration>>
@@ -99,6 +102,7 @@ classDiagram
     }
     class ConsoleInput
     class FileInput
+    class Mediator
 
     Player ..|> Observable
     Observer "*" -- "*" Observable: notifyUpdate()
@@ -108,7 +112,6 @@ classDiagram
     Field "1" *-- "1..*" FieldCell
     PlayerController *-- "1" Field: canMove()
     FieldCell o-- Event
-    
     BuffEvent ..|> Event
     DeduffEvent ..|> Event
     TeleportPlayerEvent ..|> Event
@@ -116,10 +119,71 @@ classDiagram
     FieldCreator ..> Field
     FileInput ..|> Input
     ConsoleInput ..|> Input
+    Game --|> Observable
+    Mediator -- Game
+    Mediator -- Player
+    Input -- Mediator
+    Game --|> Observer: "?"
+    FieldView o-- Field
+    GameView o-- Game
+%%    Observer <|-- PlayerView
+%%    Observer <|-- GameView
+%%    Observer <|-- FieldView
+
+
+
+
 %%    class Message
-%%    class Enemy~T::ControllScheme, 
+%%    class Enemy~T::ControllScheme,
 %%    R::PlayerCommunicationScheme~
 
 
 
+```
+
+```mermaid
+classDiagram
+    class Message {
+        <<interface>>
+        +message
+    }
+    class WinMessage {
+        PlayerCharacteristics
+    }
+    class LooseMessage {
+        DeadCellCoordinates
+    }
+    class NewGameStartedMessage {
+        FieldHeight
+        FieldWidth
+        PlayerStartCoordinate
+    }
+    class KeyMessage {
+        Key
+    }
+    class KeyCommandMessage {
+        Command
+    }
+    class KeyMissedMessage {
+        Key
+    }
+
+    Message --> `std::ostream`: << Message
+    Message <|-- WinMessage
+    Message <|-- LooseMessage
+    Message <|-- NewGameStartedMessage
+    Message <|-- KeyMessage
+    KeyMessage <|-- KeyCommandMessage
+    KeyMessage <|-- KeyMissedMessage
+
+```
+
+```mermaid
+classDiagram
+    class Enemy~T:Control,R:PlayerCommunication~ {
+    }
+    Enemy --> Player: PlayerCommunication
+    Enemy --> Field: Control
+    FieldCreator ..> Field
+    Enemy <.. FieldCreator
 ```
