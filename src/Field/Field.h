@@ -13,6 +13,8 @@
 #define DEFAULT_HEIGHT 20
 #define MAX_WIDTH 200
 #define MAX_HEIGHT 200
+#define DEFAULT_START {0, 0}
+#define DEFAULT_FINISH {19, 19}
 
 class Field {
 private:
@@ -23,13 +25,16 @@ private:
 
 public:
     explicit Field(unsigned width = DEFAULT_WIDTH,
-                   unsigned height = DEFAULT_HEIGHT);
+                   unsigned height = DEFAULT_HEIGHT,
+                   Coordinate start = DEFAULT_START,
+                   Coordinate finish = DEFAULT_FINISH
+    );
 
     ~Field();
 
-    unsigned getWidth() const;
+    [[nodiscard]] unsigned getWidth() const;
 
-    unsigned getHeight() const;
+    [[nodiscard]] unsigned getHeight() const;
 
     [[nodiscard]] static bool validateSize(unsigned width_, unsigned height_);
 
@@ -38,13 +43,13 @@ public:
     [[nodiscard]] bool validateCoordinate(Coordinate
                                           coord) const;
 
-    FieldCell getFieldCeil(Coordinate coord);
+    [[nodiscard]] FieldCell getFieldCeil(Coordinate coord);
 
-    FieldCell getFieldCeil(int x, int y);
+    [[nodiscard]] FieldCell getFieldCeil(int x, int y);
 
-    Coordinate getStart();
+    [[nodiscard]] Coordinate getStart();
 
-    Coordinate getFinish();
+    [[nodiscard]] Coordinate getFinish();
 
 };
 

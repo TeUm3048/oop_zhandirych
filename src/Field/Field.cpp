@@ -5,15 +5,26 @@
 #include <stdexcept>
 #include "Field.h"
 
-Field::Field(unsigned int width_, unsigned int height_) {
+Field::Field(unsigned int width_, unsigned int height_, Coordinate start_,
+             Coordinate finish_) {
     if (!validateSize(width_, height_))
         throw std::invalid_argument("Field of invalid size");
     width = width_;
     height = height_;
+
+    if (!validateCoordinate(start_))
+        throw std::invalid_argument("Invalid start_ coordinate");
+    if (!validateCoordinate(finish_))
+        throw std::invalid_argument("Invalid finish_ coordinate");
+
+    start = start_;
+    finish = finish_;
     field = new FieldCell *[width];
     for (int i = 0; i < width; i++) {
         field[i] = new FieldCell[height];
     }
+
+
 }
 
 Field::~Field() {
