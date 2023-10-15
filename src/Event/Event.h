@@ -9,7 +9,10 @@
 #include "../Player/Player.h"
 
 class Event {
+public:
     void virtual handle(Player &player) = 0;
+
+    virtual ~Event() = 0;
 };
 
 
