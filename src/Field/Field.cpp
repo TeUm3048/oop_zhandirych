@@ -57,6 +57,8 @@ unsigned Field::getHeight() const {
 }
 
 FieldCell Field::getFieldCeil(Coordinate coord) {
+    if (!validateCoordinate(coord))
+        throw std::invalid_argument("Invalid ceil coordinate");
     return field[coord.x][coord.y];
 }
 

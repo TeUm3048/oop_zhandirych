@@ -27,6 +27,15 @@ void PlayerController::start() {
         }
     }
 
+// Move here
+    playerMove(Direction::Left);
+    playerMove(Direction::Right);
+    playerMove(Direction::Right);
+    playerMove(Direction::Down);
+    playerMove(Direction::Down);
+    playerMove(Direction::Up);
+
+
     unsigned temp = 0;
     do {
         std::cout << "Enter new HP: ";
@@ -60,6 +69,8 @@ void PlayerController::changeField(Field &field) {
 }
 
 bool PlayerController::canMove(int x, int y) {
+    if (!_field.validateCoordinate(x, y))
+        return false;
     return !_field.getFieldCeil(x, y).isOccupied();
 }
 

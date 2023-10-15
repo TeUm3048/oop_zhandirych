@@ -27,8 +27,9 @@ public:
 
     void changeField(Field &field);
 
-protected:
     void playerMove(Direction direction);
+
+protected:
 
     [[nodiscard]] bool canMove(int x, int y);
 
