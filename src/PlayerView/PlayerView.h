@@ -3,10 +3,10 @@
 #define OOP_PLAYERVIEW_H
 
 
-#include "../Observer/Observer.h"
+#include "../IObserver/IObserver.h"
 #include "../Player/Player.h"
 
-class PlayerView : Observer {
+class PlayerView : IObserver {
 private:
     Player &_player;
 

@@ -5,14 +5,14 @@
 #include <utility>
 #include "FieldCell.h"
 
-FieldCell::FieldCell(bool occupied_, Event *event_) : event(event_) {
+FieldCell::FieldCell(bool occupied_, IEvent *event_) : event(event_) {
     occupied = occupied_;
 }
 
 // new_field_cell = FieldCell(old_cell);
 FieldCell::FieldCell(const FieldCell &other) {
-    delete this;
-    event = nullptr;
+
+    event = other.event ? other.event->clone() : nullptr;
     occupied = other.occupied;
 
 }
@@ -23,6 +23,8 @@ FieldCell &FieldCell::operator=(const FieldCell &other) {
     if (this == &other) {
         return *this;
     }
+    event = other.event ? other.event->clone() : nullptr;
+
     this->occupied = other.occupied;
     return *this;
 }
@@ -47,7 +49,7 @@ bool FieldCell::isOccupied() const {
     return occupied;
 }
 
-Event &FieldCell::getEvent() {
+IEvent &FieldCell::getEvent() {
     return *event;
 }
 

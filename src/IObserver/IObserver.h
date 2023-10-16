@@ -1,8 +1,8 @@
-#ifndef OOP_OBSERVER_H
-#define OOP_OBSERVER_H
+#ifndef OOP_IOBSERVER_H
+#define OOP_IOBSERVER_H
 
 
-class Observer {
+class IObserver {
 public:
 //  The `virtual` keyword is used to declare a virtual function in a base class.
 //  A virtual function is a member function that can be overridden
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //OOP_OBSERVER_H
+#endif //OOP_IOBSERVER_H

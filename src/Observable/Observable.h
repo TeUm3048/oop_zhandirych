@@ -3,21 +3,21 @@
 
 
 #include <vector>
-#include "../Observer/Observer.h"
+#include "../IObserver/IObserver.h"
 
 class Observable {
 public:
 // Add an observer to the list of Observers for this Observable object.
-    void addObserver(Observer *observer);
+    void addObserver(IObserver *observer);
 
 
 // The `notifyUpdate()` function is used to notify all the Observers that an update has occurred.
-// This function will run `update()` method on each Observer,
+// This function will run `update()` method on each IObserver,
 // which added for this Observable object.
     void notifyUpdate();
 
 private:
-    std::vector<Observer *> _observers;
+    std::vector<IObserver *> _observers;
 };
 
 

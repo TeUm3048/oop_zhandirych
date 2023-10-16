@@ -17,8 +17,9 @@ void PlayerController::start() {
 
     bool nameIsSet = false;
     while (!nameIsSet) {
-        std::cout << "Enter your nickname: ";
-        std::cin >> name;
+//        std::cout << "Enter your nickname: ";
+//        std::cin >> name;
+        name = "default";
         try {
             _player.setName(name);
             nameIsSet = true;
@@ -60,8 +61,16 @@ void PlayerController::playerMove(Direction direction) {
             new_coord = {_player.getX() + 1, _player.getY()};
             break;
     }
-    if (canMove(new_coord))
-        _player.setCoordinate(new_coord);
+    playerMove(new_coord);
+}
+
+void PlayerController::playerMove(Coordinate coord) {
+    if (canMove(coord))
+        _player.setCoordinate(coord);
+}
+
+void PlayerController::playerMove(int x, int y) {
+    playerMove({x, y});
 }
 
 void PlayerController::changeField(Field &field) {

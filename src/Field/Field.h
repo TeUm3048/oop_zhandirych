@@ -20,7 +20,7 @@ class Field {
 private:
     unsigned width;
     unsigned height;
-    Coordinate start, finish;
+    Coordinate start{}, finish{};
     FieldCell **field;
 
 public:
@@ -31,6 +31,12 @@ public:
     );
 
     ~Field();
+
+    Field(const Field &other);
+
+    Field &operator=(const Field &other);
+
+    Field &operator=(Field &&other) noexcept;
 
     [[nodiscard]] unsigned getWidth() const;
 

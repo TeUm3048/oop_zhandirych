@@ -7,15 +7,16 @@
 
 
 #include <memory>
-#include "../Event/Event.h"
+#include "../Events/IEvent/IEvent.h"
+
 
 class FieldCell {
 private:
     bool occupied;
-    std::unique_ptr<Event> event;
+    IEvent *event;
 public:
 
-    explicit FieldCell(bool occupied_ = false, Event *event_ = nullptr);
+    explicit FieldCell(bool occupied_ = false, IEvent *event_ = nullptr);
 
     FieldCell(const FieldCell &other);
 
@@ -30,7 +31,7 @@ public:
 
     [[nodiscard]] bool isOccupied() const;
 
-    Event &getEvent();
+    IEvent &getEvent();
 
 };
 

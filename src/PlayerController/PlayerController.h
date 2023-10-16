@@ -29,6 +29,10 @@ public:
 
     void playerMove(Direction direction);
 
+    void playerMove(Coordinate coord);
+
+    void playerMove(int x, int y);
+
 protected:
 
     [[nodiscard]] bool canMove(int x, int y);

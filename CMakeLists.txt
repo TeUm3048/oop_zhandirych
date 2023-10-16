@@ -7,8 +7,8 @@ add_executable(OOP
         src/PlayerView/PlayerView.h
         src/PlayerView/PlayerView.cpp
         src/PlayerController/PlayerController.h
-        src/Observer/Observer.cpp
-        src/Observer/Observer.h
+        src/IObserver/IObserver.cpp
+        src/IObserver/IObserver.h
         src/Observable/Observable.cpp
         src/Observable/Observable.h
         src/Player/Player.cpp
@@ -23,5 +23,9 @@ add_executable(OOP
         src/Field/Field.cpp
         src/Field/Field.h
         src/Coordinate/Coordinate.h
-        src/Event/Event.cpp
-        src/Event/Event.h)
+        src/Events/IEvent/IEvent.h
+        src/Events/HealEvent/HealEvent.cpp
+        src/Events/HealEvent/HealEvent.h
+        src/Events/TeleportEvent/TeleportEvent.cpp
+        src/Events/TeleportEvent/TeleportEvent.h
+        src/Events/IEvent/EventTarget.h)

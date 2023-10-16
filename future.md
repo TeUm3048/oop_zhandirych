@@ -126,9 +126,9 @@ classDiagram
     Game --|> Observer: "?"
     FieldView o-- Field
     GameView o-- Game
-%%    Observer <|-- PlayerView
-%%    Observer <|-- GameView
-%%    Observer <|-- FieldView
+%%    IObserver <|-- PlayerView
+%%    IObserver <|-- GameView
+%%    IObserver <|-- FieldView
 
 
 

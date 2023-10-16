@@ -3,6 +3,7 @@
 //
 
 #include <stdexcept>
+#include <utility>
 #include "Field.h"
 
 Field::Field(unsigned int width_, unsigned int height_, Coordinate start_,
@@ -24,7 +25,6 @@ Field::Field(unsigned int width_, unsigned int height_, Coordinate start_,
         field[i] = new FieldCell[height];
     }
 
-
 }
 
 Field::~Field() {
@@ -32,6 +32,56 @@ Field::~Field() {
         delete[] field[i];
     }
     delete[] field;
+}
+
+// copy constructor
+Field::Field(const Field &other) : width(other.width), height(other.height),
+                                   start(other.start), finish(other.finish) {
+    field = new FieldCell *[width];
+    for (int i = 0; i < width; ++i) {
+        field[i] = new FieldCell[height];
+        std::copy(other.field[i], other.field[i] + height, field[i]);
+    }
+}
+
+// copy assigment
+Field &Field::operator=(const Field &other) {
+    if (this == &other)
+        return *this;
+    if (width != other.width) {
+        delete field;
+        field = new FieldCell *[other.width];
+        for (int i = 0; i < other.width; i++) {
+            field[i] = new FieldCell[other.height];
+        }
+    } else if (height != other.height) {
+        for (int i = 0; i < other.width; i++) {
+            delete field[i];
+            field[i] = new FieldCell[other.height];
+        }
+    }
+
+    width = other.width;
+    height = other.height;
+    start = other.start;
+    finish = other.finish;
+    for (int i = 0; i < width; ++i) {
+        std::copy(other.field[i], other.field[i] + height, field[i]);
+    }
+    return *this;
+}
+
+// move assigment
+Field &Field::operator=(Field &&other) noexcept {
+    if (this == &other)
+        return *this;
+    delete field;
+    height = other.height;
+    width = other.width;
+    start = other.start;
+    finish = other.finish;
+    field = std::exchange(other.field, nullptr);
+    return *this;
 }
 
 bool Field::validateCoordinate(int x, int y) const {

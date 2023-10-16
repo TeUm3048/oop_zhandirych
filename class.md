@@ -4,7 +4,7 @@ Title: Class diagram
 ---
 classDiagram
     class Coordinate {
-        <<stract>>
+        <<struct>>
         + x: int
         + y: int
     }
@@ -17,12 +17,11 @@ classDiagram
         #canMove()
     }
     class Observable {
-        <<interface>>
         +addObserver(Observer)
         +notifyObservers()
         -Observer[]
     }
-    class Observer {
+    class IObserver {
         <<interface>>
         +update()
     }
@@ -72,17 +71,26 @@ classDiagram
         +validateCoordinate()
         +validateSize()
     }
-%%    class Event {
-%%        <<interface>>
-%%    }
+    class IEvent {
+        <<interface>>
+        handle(EventTarget)
+    }
+    class EventTarget{
+        <<struct>>
+        PlayerController
+        Player
+        Field
+        Coordinate
+    }
 
-    Player ..|> Observable
-    Observer "*" -- "*" Observable: notifyUpdate()
-    PlayerView ..|> Observer
+    Player --|> Observable
+    IObserver "*" -- "*" Observable: notifyUpdate()
+    PlayerView ..|> IObserver
     PlayerView o-- "1" Player
     PlayerController o--> "1" Player
     Field "1" *-- "1..*" FieldCell
     PlayerController *-- "1" Field: canMove()
-%%    FieldCell o-- Event
+
+    FieldCell *-- IEvent
 
 ```
