@@ -9,7 +9,6 @@
 #include "../../Player/Player.h"
 #include "../../Field/Field.h"
 #include "../../Coordinate/Coordinate.h"
-#include "IEvent.h"
 
 struct EventTarget {
     PlayerController &controller;

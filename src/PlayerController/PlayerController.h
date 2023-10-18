@@ -33,6 +33,10 @@ public:
 
     void playerMove(int x, int y);
 
+    void playerDecreaseHP(unsigned HP);
+
+    void playerIncreaseHP(unsigned HP);
+
 protected:
 
     [[nodiscard]] bool canMove(int x, int y);

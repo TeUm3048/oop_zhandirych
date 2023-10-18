@@ -1,5 +1,6 @@
 #include <iostream>
 #include "PlayerController.h"
+#include "../FieldView/FieldView.h"
 
 PlayerController::PlayerController(Player &player) : _player(player),
                                                      _field(Field()) {
@@ -28,20 +29,37 @@ void PlayerController::start() {
         }
     }
 
-// Move here
-    playerMove(Direction::Left);
-    playerMove(Direction::Right);
-    playerMove(Direction::Right);
-    playerMove(Direction::Down);
-    playerMove(Direction::Down);
-    playerMove(Direction::Up);
+    playerMove(_field.getStart());
 
 
+    FieldView fieldView(_field, _player);
     unsigned temp = 0;
     do {
-        std::cout << "Enter new HP: ";
-        std::cin >> temp;
-        _player.setHP(temp);
+        std::cout << fieldView.renderField();
+
+        std::cout << "Enter direction: ";
+        char buff;
+        std::cin >> buff;
+
+        switch (buff) {
+            case 'W':
+            case 'w':
+                playerMove(Up);
+                break;
+            case 'A':
+            case 'a':
+                playerMove(Left);
+                break;
+            case 'S':
+            case 's':
+                playerMove(Down);
+                break;
+            case 'D':
+            case 'd':
+                playerMove(Right);
+                break;
+        }
+
     } while (_player.isAlive());
 }
 
@@ -85,5 +103,16 @@ bool PlayerController::canMove(int x, int y) {
 
 bool PlayerController::canMove(Coordinate coord) {
     return canMove(coord.x, coord.y);
+}
+
+void PlayerController::playerDecreaseHP(unsigned int HP) {
+    unsigned prevHP = _player.getHP();
+    unsigned newHP = prevHP >= HP ? prevHP - HP : 0;
+    _player.setHP(newHP);
+}
+
+void PlayerController::playerIncreaseHP(unsigned int HP) {
+    unsigned prevHP = _player.getHP();
+    _player.setHP(prevHP + HP);
 }
 

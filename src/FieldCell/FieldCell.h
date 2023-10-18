@@ -33,6 +33,8 @@ public:
 
     IEvent &getEvent();
 
+    void setEvent(IEvent *event);
+
 };
 
 

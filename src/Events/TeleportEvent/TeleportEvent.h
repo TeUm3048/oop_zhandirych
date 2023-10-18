@@ -14,9 +14,9 @@ public:
 
     explicit TeleportEvent(int x, int y);
 
-    void handle(EventTarget &eventTarget) final;
+    void handle(EventTarget &eventTarget) override;
 
-    IEvent *clone() final;
+    IEvent *clone() override;
 
 
 private:

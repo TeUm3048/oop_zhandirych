@@ -4,10 +4,11 @@
 
 #include "HealEvent.h"
 
-HealEvent::HealEvent(unsigned int heal_hp_): heal_hp(heal_hp_) {
+HealEvent::HealEvent(unsigned int heal_hp_) : heal_hp(heal_hp_) {
 }
 
 void HealEvent::handle(EventTarget &eventTarget) {
+    eventTarget.controller.playerIncreaseHP(heal_hp);
 }
 
 IEvent *HealEvent::clone() {

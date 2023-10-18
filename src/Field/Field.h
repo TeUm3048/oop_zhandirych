@@ -8,6 +8,7 @@
 
 #include "../FieldCell/FieldCell.h"
 #include "../Coordinate/Coordinate.h"
+#include "../Observable/Observable.h"
 
 #define DEFAULT_WIDTH 30
 #define DEFAULT_HEIGHT 20
@@ -16,7 +17,7 @@
 #define DEFAULT_START {0, 0}
 #define DEFAULT_FINISH {19, 19}
 
-class Field {
+class Field : public Observable {
 private:
     unsigned width;
     unsigned height;
@@ -49,9 +50,9 @@ public:
     [[nodiscard]] bool validateCoordinate(Coordinate
                                           coord) const;
 
-    [[nodiscard]] FieldCell getFieldCeil(Coordinate coord);
+    [[nodiscard]] FieldCell& getFieldCeil(Coordinate coord);
 
-    [[nodiscard]] FieldCell getFieldCeil(int x, int y);
+    [[nodiscard]] FieldCell& getFieldCeil(int x, int y);
 
     [[nodiscard]] Coordinate getStart();
 

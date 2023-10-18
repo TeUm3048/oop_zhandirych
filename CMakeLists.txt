@@ -28,4 +28,12 @@ add_executable(OOP
         src/Events/HealEvent/HealEvent.h
         src/Events/TeleportEvent/TeleportEvent.cpp
         src/Events/TeleportEvent/TeleportEvent.h
-        src/Events/IEvent/EventTarget.h)
+        src/Events/IEvent/EventTarget.h
+        src/Events/TrapEvent/TrapEvent.cpp
+        src/Events/TrapEvent/TrapEvent.h
+        src/FieldCreator/FieldCreator.cpp
+        src/FieldCreator/FieldCreator.h
+        src/FieldView/FieldView.cpp
+        src/FieldView/FieldView.h
+        src/EventFactory/EventFactory.cpp
+        src/EventFactory/EventFactory.h)
