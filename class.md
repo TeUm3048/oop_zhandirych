@@ -1,3 +1,5 @@
+# Class diagram
+
 ```mermaid
 ---
 Title: Class diagram
