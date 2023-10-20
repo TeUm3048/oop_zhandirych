@@ -37,6 +37,10 @@ public:
 
     void playerIncreaseHP(unsigned HP);
 
+    void triggerEvent(Coordinate coord);
+
+    void triggerEvent(int x, int y);
+
 protected:
 
     [[nodiscard]] bool canMove(int x, int y);

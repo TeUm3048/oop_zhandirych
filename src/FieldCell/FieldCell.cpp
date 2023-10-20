@@ -49,8 +49,10 @@ bool FieldCell::isOccupied() const {
     return occupied;
 }
 
-IEvent &FieldCell::getEvent() {
-    return *event;
+IEvent *FieldCell::getEvent() {
+    if (event)
+        return event->clone();
+    return nullptr;
 }
 
 void FieldCell::setEvent(IEvent *event_) {

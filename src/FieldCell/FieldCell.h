@@ -31,7 +31,7 @@ public:
 
     [[nodiscard]] bool isOccupied() const;
 
-    IEvent &getEvent();
+    IEvent *getEvent();
 
     void setEvent(IEvent *event);
 

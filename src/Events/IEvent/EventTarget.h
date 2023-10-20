@@ -14,7 +14,7 @@ struct EventTarget {
     PlayerController &controller;
     Player &player;
     Field &field;
-    Coordinate &coord;
+    Coordinate coord;
 };
 
 #endif //OOP_EVENTTARGET_H

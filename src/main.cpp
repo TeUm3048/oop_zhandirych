@@ -8,7 +8,7 @@ int main(int argc, char const *argv[]) {
     std::setlocale(LC_ALL, "ru_RU.UTF-8");
     Player player;
     FieldCreator fieldCreator;
-    Field field = fieldCreator.createFieldForLevel(1);
+    Field field = fieldCreator.createFieldForLevel(2);
     PlayerView view(player);
     PlayerController controller(player, field);
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "PlayerController.h"
 #include "../FieldView/FieldView.h"
+#include "../Events/IEvent/EventTarget.h"
 
 PlayerController::PlayerController(Player &player) : _player(player),
                                                      _field(Field()) {
@@ -83,8 +84,11 @@ void PlayerController::playerMove(Direction direction) {
 }
 
 void PlayerController::playerMove(Coordinate coord) {
-    if (canMove(coord))
-        _player.setCoordinate(coord);
+    if (!canMove(coord))
+        return;
+    _player.setCoordinate(coord);
+
+    triggerEvent(_player.getCoordinate());
 }
 
 void PlayerController::playerMove(int x, int y) {
@@ -114,5 +118,18 @@ void PlayerController::playerDecreaseHP(unsigned int HP) {
 void PlayerController::playerIncreaseHP(unsigned int HP) {
     unsigned prevHP = _player.getHP();
     _player.setHP(prevHP + HP);
+}
+
+void PlayerController::triggerEvent(Coordinate coord) {
+    IEvent *ev = _field.getFieldCeil(coord).getEvent();
+    if (ev) {
+        EventTarget eventTarget = {*this, _player, _field,
+                                   coord};
+        ev->handle(eventTarget);
+    }
+}
+
+void PlayerController::triggerEvent(int x, int y) {
+    triggerEvent({x, y});
 }
 
