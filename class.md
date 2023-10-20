@@ -8,15 +8,28 @@ classDiagram
         + x: int
         + y: int
     }
+    
     class PlayerController {
         +start()
         -Player
         -Field
         +changeField()
-        #playerMove()
+        +playerMove()
+        +playerDecreaseHP()
+        +playerIncreaseHP()
+        +triggerEvent()
         #canMove()
     }
+    
     namespace MVC {
+        class FieldView {
+            -Field
+            +renderField
+        }
+        class PlayerView {
+            -Player
+            +renderPlayer()
+        }
         class Observable {
             +addObserver(Observer)
             +notifyObservers()
@@ -42,16 +55,15 @@ classDiagram
         +setY(int y_)
         +getY()
     }
-    class PlayerView {
-        -Player
-        +renderPlayer()
-    }
+ 
     class Directions {
         <<enumeration>>
         Up, Right, Down, Left
     }
     namespace Fields {
-        class FieldCreator
+        class FieldCreator {
+            +getFieldForLevel(int level)
+        }
         class FieldCell {
             -occupied
             -*Event
@@ -59,9 +71,10 @@ classDiagram
             +setOccupied()
             +removeOccupied()
             +getEvent()
-            +addEvent()
+            +setEvent()
         }
         class Field {
+            
             -FieldCell[][]
             -start: Coordinate
             -finish: Coordinate
@@ -81,7 +94,7 @@ classDiagram
         class IEvent {
             <<interface>>
             handle(EventTarget)
-            clone()
+            *IEvent clone()
         }
         class EventTarget {
             <<struct>>
@@ -98,10 +111,14 @@ classDiagram
             healHP
         }
         class TeleportEvent {
-            Coordinate
+            teleportCoordinate
+        }
+        class EventFactory {
+            +getTrapEvent()
+            +getHealEvent()
+            +getTeleportEvent()
         }
     }
-
     Player --|> Observable
     IObserver "*" -- "*" Observable: notifyUpdate()
     PlayerView ..|> IObserver
@@ -114,9 +131,14 @@ classDiagram
     IEvent <|.. HealEvent
     IEvent <|.. TeleportEvent
     IEvent --> EventTarget
-    EventTarget --> PlayerController
-    EventTarget *-- Player
-    EventTarget --> Field
-
+%%    EventTarget --> PlayerController
+%%    EventTarget *-- Player
+%%    EventTarget --> Field
+    FieldCreator --> EventFactory: gets Event
+    EventFactory ..> IEvent
+    
+    FieldView o-- Field
+    FieldView ..|> IObserver
+    Observable <|-- Field
 
 ```
