@@ -9,31 +9,29 @@ FieldCell::FieldCell(bool occupied_, IEvent *event_) : event(event_) {
     occupied = occupied_;
 }
 
-// new_field_cell = FieldCell(old_cell);
+// FieldCell new_field_cell(other);
 FieldCell::FieldCell(const FieldCell &other) {
-
     event = other.event ? other.event->clone() : nullptr;
     occupied = other.occupied;
-
 }
-
 
 // this_cell = other;
 FieldCell &FieldCell::operator=(const FieldCell &other) {
-    if (this == &other) {
+    if (this == &other)
         return *this;
-    }
-    event = other.event ? other.event->clone() : nullptr;
-
-    this->occupied = other.occupied;
+    FieldCell tmp(other);
+    this->swap(tmp);
     return *this;
 }
 
+FieldCell::FieldCell(FieldCell &&other) noexcept: occupied(false),
+                                                  event(nullptr) {
+    this->swap(other);
+}
 
 // field_cell = std::move(other)
 FieldCell &FieldCell::operator=(FieldCell &&other) noexcept {
-    occupied = other.occupied;
-    event = std::exchange(other.event, nullptr);
+    this->swap(other);
     return *this;
 }
 
@@ -58,4 +56,10 @@ IEvent *FieldCell::getEvent() {
 void FieldCell::setEvent(IEvent *event_) {
 
     event = event_ ? event_->clone() : nullptr;
+}
+
+void FieldCell::swap(FieldCell &other) noexcept {
+    std::swap(this->occupied, other.occupied);
+    std::swap(this->event, other.event);
+
 }

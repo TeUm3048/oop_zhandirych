@@ -36,8 +36,8 @@ Field::~Field() {
 
 // copy constructor
 Field::Field(const Field &other) : width(other.width), height(other.height),
-                                   start(other.start), finish(other.finish) {
-    field = new FieldCell *[width];
+                                   start(other.start), finish(other.finish),
+                                   field(new FieldCell *[width]) {
     for (int i = 0; i < width; ++i) {
         field[i] = new FieldCell[height];
         std::copy(other.field[i], other.field[i] + height, field[i]);
@@ -48,40 +48,32 @@ Field::Field(const Field &other) : width(other.width), height(other.height),
 Field &Field::operator=(const Field &other) {
     if (this == &other)
         return *this;
-    if (width != other.width) {
-        delete field;
-        field = new FieldCell *[other.width];
-        for (int i = 0; i < other.width; i++) {
-            field[i] = new FieldCell[other.height];
-        }
-    } else if (height != other.height) {
-        for (int i = 0; i < other.width; i++) {
-            delete field[i];
-            field[i] = new FieldCell[other.height];
-        }
-    }
-
-    width = other.width;
-    height = other.height;
-    start = other.start;
-    finish = other.finish;
-    for (int i = 0; i < width; ++i) {
-        std::copy(other.field[i], other.field[i] + height, field[i]);
-    }
+    Field tmp(other);
+    swap(tmp);
     return *this;
+}
+
+// move constructor
+Field::Field(Field &&other) noexcept: field(nullptr), height(0),
+                                      width(0), start({0, 0}),
+                                      finish({0, 0}) {
+    swap(other);
 }
 
 // move assigment
 Field &Field::operator=(Field &&other) noexcept {
     if (this == &other)
         return *this;
-    delete field;
-    height = other.height;
-    width = other.width;
-    start = other.start;
-    finish = other.finish;
-    field = std::exchange(other.field, nullptr);
+    swap(other);
     return *this;
+}
+
+void Field::swap(Field &other) noexcept {
+    std::swap(this->field, other.field);
+    std::swap(this->width, other.width);
+    std::swap(this->height, other.height);
+    std::swap(this->finish, other.finish);
+    std::swap(this->start, other.start);
 }
 
 bool Field::validateCoordinate(int x, int y) const {
@@ -106,13 +98,13 @@ unsigned Field::getHeight() const {
     return height;
 }
 
-FieldCell& Field::getFieldCell(Coordinate coord) {
+FieldCell &Field::getFieldCell(Coordinate coord) {
     if (!validateCoordinate(coord))
         throw std::invalid_argument("Invalid cell coordinate");
     return field[coord.x][coord.y];
 }
 
-FieldCell& Field::getFieldCell(int x, int y) {
+FieldCell &Field::getFieldCell(int x, int y) {
     return getFieldCell({x, y});
 }
 

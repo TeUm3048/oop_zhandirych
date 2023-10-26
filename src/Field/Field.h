@@ -37,7 +37,11 @@ public:
 
     Field &operator=(const Field &other);
 
+    Field(Field &&other) noexcept;
+
     Field &operator=(Field &&other) noexcept;
+
+    void swap(Field& other) noexcept;
 
     [[nodiscard]] unsigned getWidth() const;
 
@@ -50,9 +54,9 @@ public:
     [[nodiscard]] bool validateCoordinate(Coordinate
                                           coord) const;
 
-    [[nodiscard]] FieldCell& getFieldCell(Coordinate coord);
+    [[nodiscard]] FieldCell &getFieldCell(Coordinate coord);
 
-    [[nodiscard]] FieldCell& getFieldCell(int x, int y);
+    [[nodiscard]] FieldCell &getFieldCell(int x, int y);
 
     [[nodiscard]] Coordinate getStart();
 

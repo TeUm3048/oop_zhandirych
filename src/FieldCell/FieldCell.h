@@ -20,8 +20,9 @@ public:
 
     FieldCell(const FieldCell &other);
 
-
     FieldCell &operator=(const FieldCell &other);
+
+    FieldCell(FieldCell &&other) noexcept ;
 
     FieldCell &operator=(FieldCell &&other) noexcept;
 
@@ -34,6 +35,8 @@ public:
     IEvent *getEvent();
 
     void setEvent(IEvent *event);
+
+    void swap(FieldCell &other) noexcept;
 
 };
 
