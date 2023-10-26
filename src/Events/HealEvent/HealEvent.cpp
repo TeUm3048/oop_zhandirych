@@ -9,6 +9,7 @@ HealEvent::HealEvent(unsigned int heal_hp_) : heal_hp(heal_hp_) {
 
 void HealEvent::handle(EventTarget &eventTarget) {
     eventTarget.controller.playerIncreaseHP(heal_hp);
+    eventTarget.field.getFieldCell(eventTarget.coord).setEvent(nullptr);
 }
 
 IEvent *HealEvent::clone() {

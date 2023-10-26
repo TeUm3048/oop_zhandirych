@@ -50,9 +50,9 @@ public:
     [[nodiscard]] bool validateCoordinate(Coordinate
                                           coord) const;
 
-    [[nodiscard]] FieldCell& getFieldCeil(Coordinate coord);
+    [[nodiscard]] FieldCell& getFieldCell(Coordinate coord);
 
-    [[nodiscard]] FieldCell& getFieldCeil(int x, int y);
+    [[nodiscard]] FieldCell& getFieldCell(int x, int y);
 
     [[nodiscard]] Coordinate getStart();
 

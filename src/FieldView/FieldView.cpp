@@ -62,7 +62,7 @@ std::string FieldView::renderField() {
             if (player.getX() == x && player.getY() == y) {
                 buff += "[P]";
             } else {
-                FieldCell cell = field.getFieldCeil(x, y);
+                FieldCell cell = field.getFieldCell(x, y);
                 buff += renderCell(cell);
             }
         }

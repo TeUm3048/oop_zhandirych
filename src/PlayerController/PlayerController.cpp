@@ -102,7 +102,7 @@ void PlayerController::changeField(Field &field) {
 bool PlayerController::canMove(int x, int y) {
     if (!_field.validateCoordinate(x, y))
         return false;
-    return !_field.getFieldCeil(x, y).isOccupied();
+    return !_field.getFieldCell(x, y).isOccupied();
 }
 
 bool PlayerController::canMove(Coordinate coord) {
@@ -121,7 +121,7 @@ void PlayerController::playerIncreaseHP(unsigned int HP) {
 }
 
 void PlayerController::triggerEvent(Coordinate coord) {
-    IEvent *ev = _field.getFieldCeil(coord).getEvent();
+    IEvent *ev = _field.getFieldCell(coord).getEvent();
     if (ev) {
         EventTarget eventTarget = {*this, _player, _field,
                                    coord};

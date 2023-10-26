@@ -56,5 +56,6 @@ IEvent *FieldCell::getEvent() {
 }
 
 void FieldCell::setEvent(IEvent *event_) {
-    event = event_->clone();
+
+    event = event_ ? event_->clone() : nullptr;
 }

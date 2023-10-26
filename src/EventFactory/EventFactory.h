@@ -14,13 +14,14 @@
 
 class EventFactory {
 public:
-    IEvent *createHealEvent(unsigned healHP);
+    static IEvent *createHealEvent(unsigned healHP);
 
-    IEvent *createTeleportEvent(Coordinate teleportCoordinate);
-    IEvent *createTeleportEvent(int x, int y);
+    static IEvent *createTeleportEvent(Coordinate teleportCoordinate);
+
+    static IEvent *createTeleportEvent(int x, int y);
 
 
-    IEvent *createTrapEvent(unsigned damage);
+    static IEvent *createTrapEvent(unsigned damage);
 };
 
 

@@ -72,7 +72,7 @@ classDiagram
         +getHeight()
         +getStart() -> Coordinate
         +getFinish() -> Coordinate
-        +getFieldCeil()
+        +getFieldCell()
         +validateCoordinate()
         +validateSize()
     }

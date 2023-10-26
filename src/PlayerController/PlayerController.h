@@ -4,6 +4,7 @@
 #include "../Player/Player.h"
 #include "../Field/Field.h"
 
+
 enum Direction {
     Up, Right, Down, Left
 };

@@ -19,7 +19,7 @@ classDiagram
         +playerMove()
         +playerDecreaseHP()
         +playerIncreaseHP()
-        +triggerEvent()
+        +triggerEvent(Coordinate)
         #canMove()
     }
     
@@ -57,7 +57,7 @@ classDiagram
         +setY(int y_)
         +getY()
     }
- 
+
     class Directions {
         <<enumeration>>
         Up, Right, Down, Left
@@ -76,7 +76,7 @@ classDiagram
             +setEvent()
         }
         class Field {
-            
+
             -FieldCell[][]
             -start: Coordinate
             -finish: Coordinate
@@ -86,12 +86,11 @@ classDiagram
             +getHeight()
             +getStart() -> Coordinate
             +getFinish() -> Coordinate
-            +getFieldCeil()
+            +getFieldCell()
             +validateCoordinate()
             +validateSize()
         }
     }
-    Field <.. FieldCreator
     namespace Events {
         class IEvent {
             <<interface>>
@@ -100,20 +99,20 @@ classDiagram
         }
         class EventTarget {
             <<struct>>
-            PlayerController
-            Player
-            Field
+            PlayerController&
+            Player&
+            Field&
             Coordinate
         }
 
         class TrapEvent {
-            damage
+            -damage
         }
         class HealEvent {
-            healHP
+            -healHP
         }
         class TeleportEvent {
-            teleportCoordinate
+            -teleportCoordinate
         }
         class EventFactory {
             +getTrapEvent()
@@ -127,18 +126,23 @@ classDiagram
     PlayerView o-- "1" Player
     PlayerController o--> "1" Player
     Field "1" *-- "1..*" FieldCell
-    PlayerController *-- "1" Field: canMove()
+    PlayerController *-- "1" Field
     FieldCell *-- IEvent
     IEvent <|.. TrapEvent
     IEvent <|.. HealEvent
     IEvent <|.. TeleportEvent
     IEvent --> EventTarget
-%%    EventTarget --> PlayerController
-%%    EventTarget *-- Player
-%%    EventTarget --> Field
+
     FieldCreator --> EventFactory: gets Event
     EventFactory ..> IEvent
+    Field <.. FieldCreator
+
+%%    TrapEvent --> PlayerController: playerDecreaseHP()
+%%    HealEvent --> PlayerController: playerIncreaseHP()
+%%    TeleportEvent --> PlayerController: playerMove()
     
+%%    PlayerController "triggerEvent" -->"handle()" IEvent: 
+    EventTarget o--> PlayerController
     FieldView o-- Field
     FieldView ..|> IObserver
     Observable <|-- Field

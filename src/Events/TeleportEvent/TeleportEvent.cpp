@@ -13,6 +13,7 @@ TeleportEvent::TeleportEvent(int x, int y) : TeleportEvent(Coordinate{x, y}) {
 
 void TeleportEvent::handle(EventTarget &eventTarget) {
     eventTarget.controller.playerMove(tpCoord);
+
 }
 
 IEvent *TeleportEvent::clone() {

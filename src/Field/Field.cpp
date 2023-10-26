@@ -106,14 +106,14 @@ unsigned Field::getHeight() const {
     return height;
 }
 
-FieldCell& Field::getFieldCeil(Coordinate coord) {
+FieldCell& Field::getFieldCell(Coordinate coord) {
     if (!validateCoordinate(coord))
-        throw std::invalid_argument("Invalid ceil coordinate");
+        throw std::invalid_argument("Invalid cell coordinate");
     return field[coord.x][coord.y];
 }
 
-FieldCell& Field::getFieldCeil(int x, int y) {
-    return getFieldCeil({x, y});
+FieldCell& Field::getFieldCell(int x, int y) {
+    return getFieldCell({x, y});
 }
 
 Coordinate Field::getStart() {
