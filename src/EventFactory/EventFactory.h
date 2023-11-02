@@ -14,7 +14,7 @@
 
 class EventFactory {
 public:
-    static IEvent *createHealEvent(unsigned healHP);
+    static IEvent *createHealEvent(unsigned healHP, unsigned numberOfUses = 1);
 
     static IEvent *createTeleportEvent(Coordinate teleportCoordinate);
 

@@ -9,6 +9,10 @@ FieldCell::FieldCell(bool occupied_, IEvent *event_) : event(event_) {
     occupied = occupied_;
 }
 
+FieldCell::~FieldCell() {
+    delete event;
+}
+
 // FieldCell new_field_cell(other);
 FieldCell::FieldCell(const FieldCell &other) {
     event = other.event ? other.event->clone() : nullptr;
@@ -48,14 +52,12 @@ bool FieldCell::isOccupied() const {
 }
 
 IEvent *FieldCell::getEvent() {
-    if (event)
-        return event->clone();
-    return nullptr;
+    return event;
 }
 
 void FieldCell::setEvent(IEvent *event_) {
-
-    event = event_ ? event_->clone() : nullptr;
+    delete event;
+    event = event_;
 }
 
 void FieldCell::swap(FieldCell &other) noexcept {

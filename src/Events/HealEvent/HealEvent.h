@@ -11,7 +11,7 @@
 
 class HealEvent : public IEvent {
 public:
-    explicit HealEvent(unsigned healHP);
+    explicit HealEvent(unsigned healHP, unsigned numberOfUses);
 
 
     void handle(EventTarget &) override;
@@ -20,6 +20,7 @@ public:
 
 private:
     unsigned heal_hp;
+    unsigned numberOfUses;
 };
 
 

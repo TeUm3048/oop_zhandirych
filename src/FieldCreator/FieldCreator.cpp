@@ -50,14 +50,14 @@ Field FieldCreator::createFieldForLevel2() {
         FieldCell &cell = field.getFieldCell(i, i);
         FieldCell &right_cell = field.getFieldCell(i + 1, i);
         cell.setOccupied();
-        EventFactory eventFactory;
-        IEvent *tpEv = eventFactory.createTeleportEvent(3, 2);
-        field.getFieldCell(2, 3).setEvent(tpEv);
-
-        IEvent *healEv = eventFactory.createHealEvent(30);
-        IEvent *trapEv = eventFactory.createTrapEvent(21);
-        field.getFieldCell(4, 2).setEvent(healEv);
-        field.getFieldCell(3, 1).setEvent(trapEv);
     }
+    IEvent *tpEv = EventFactory::createTeleportEvent(3, 2);
+    field.getFieldCell(2, 3).setEvent(tpEv);
+
+    IEvent *healEv = EventFactory::createHealEvent(30);
+    IEvent *trapEv = EventFactory::createTrapEvent(21);
+    field.getFieldCell(4, 2).setEvent(healEv);
+    field.getFieldCell(3, 1).setEvent(trapEv);
+
     return field;
 }

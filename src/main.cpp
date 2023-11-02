@@ -14,7 +14,7 @@ void updateLocale() {
     SetConsoleOutputCP(CP_UTF8);
 }
 
-#elif
+#elif __linux__
 void updateLocale() {
     std::setlocale(LC_ALL, "ru_RU.UTF8");
 }

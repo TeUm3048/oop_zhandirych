@@ -13,8 +13,9 @@ class IEvent {
 public:
     virtual void handle(EventTarget &) = 0;
 
-    virtual IEvent *clone() = 0;
+    virtual ~IEvent() = default;
 
+    virtual IEvent *clone() = 0;
 };
 
 

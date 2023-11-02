@@ -2,10 +2,17 @@
 // Created by TeUm3 on 18.10.2023.
 //
 
+#include <stdexcept>
 #include "EventFactory.h"
 
-IEvent *EventFactory::createHealEvent(unsigned healHP) {
-    return new HealEvent(healHP);
+IEvent *EventFactory::createHealEvent(unsigned healHP,
+                                      unsigned numberOfUses) {
+    try {
+        return new HealEvent(healHP, numberOfUses);
+    }
+    catch (const std::invalid_argument &e) {
+        return nullptr;
+    }
 }
 
 IEvent *EventFactory::createTeleportEvent(Coordinate teleportCoordinate) {

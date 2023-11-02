@@ -2,14 +2,22 @@
 // Created by TeUm3 on 15.10.2023.
 //
 
+#include <stdexcept>
 #include "HealEvent.h"
 
-HealEvent::HealEvent(unsigned int heal_hp_) : heal_hp(heal_hp_) {
+HealEvent::HealEvent(unsigned int heal_hp_, unsigned numberOfUses_) : heal_hp(
+        heal_hp_), numberOfUses(numberOfUses_) {
+    if (numberOfUses <= 0) {
+        throw std::invalid_argument("Invalid numberOfUsage:"
+                                    "numberOfUsage must be more than 0");
+    }
 }
 
 void HealEvent::handle(EventTarget &eventTarget) {
     eventTarget.controller.playerIncreaseHP(heal_hp);
-    eventTarget.field.getFieldCell(eventTarget.coord).setEvent(nullptr);
+    --numberOfUses;
+    if (numberOfUses == 0)
+        eventTarget.field.getFieldCell(eventTarget.coord).setEvent(nullptr);
 }
 
 IEvent *HealEvent::clone() {

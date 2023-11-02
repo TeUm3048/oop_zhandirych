@@ -11,7 +11,7 @@ PlayerView::PlayerView(Player &player) : _player(player) {
 PlayerView::~PlayerView() = default;
 
 void PlayerView::renderPlayer() {
-    system("cls");
+    system("clear");
     std::cout << "Player: " << _player.getName() << std::endl;
     std::cout << "Player position:" << std::endl;
     std::cout << "\t X:" << _player.getX() << std::endl;

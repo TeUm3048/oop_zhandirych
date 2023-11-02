@@ -18,6 +18,8 @@ public:
 
     explicit FieldCell(bool occupied_ = false, IEvent *event_ = nullptr);
 
+    ~FieldCell();
+
     FieldCell(const FieldCell &other);
 
     FieldCell &operator=(const FieldCell &other);
