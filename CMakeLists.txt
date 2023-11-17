@@ -36,4 +36,16 @@ add_executable(OOP
         src/FieldView/FieldView.cpp
         src/FieldView/FieldView.h
         src/EventFactory/EventFactory.cpp
-        src/EventFactory/EventFactory.h)
+        src/EventFactory/EventFactory.h
+        src/Game/Game.cpp
+        src/Game/Game.h
+        src/GameMenu/GameMenu.cpp
+        src/GameMenu/GameMenu.h
+        src/IInput/IInput.h
+        src/Controls/Controls.h
+        src/KeyboardInput/KeyboardInput.cpp
+        src/KeyboardInput/KeyboardInput.h
+        src/utils/FileReader.cpp
+        src/utils/FileReader.h
+        input.txt
+)

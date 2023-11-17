@@ -10,7 +10,7 @@ classDiagram
         + x: int
         + y: int
     }
-    
+
     class PlayerController {
         +start()
         -Player
@@ -22,7 +22,7 @@ classDiagram
         +triggerEvent(Coordinate)
         #canMove()
     }
-    
+
     namespace MVC {
         class FieldView {
             -Field
@@ -76,7 +76,6 @@ classDiagram
             +setEvent()
         }
         class Field {
-
             -FieldCell[][]
             -start: Coordinate
             -finish: Coordinate
@@ -120,6 +119,32 @@ classDiagram
             +getTeleportEvent()
         }
     }
+    class Game {
+        +startGame()
+        +closeGame()
+        +setLevel()
+        +setPlayer()
+        -isGameWin()
+        -isGameLoose()
+        -startLevel()
+        +closeProgram()
+    }
+    class IInput {
+        <<interface>>
+        +readLine() -> Controls
+    }
+
+    class KeyboardInput {
+    }
+
+    class Controls {
+        <<enumeration>>
+        MOVE_UP
+        MOVE_RIGHT
+        MOVE_DOWN
+        MOVE_LEFT
+    }
+
     Player --|> Observable
     IObserver "*" -- "*" Observable: notifyUpdate()
     PlayerView ..|> IObserver
@@ -132,19 +157,66 @@ classDiagram
     IEvent <|.. HealEvent
     IEvent <|.. TeleportEvent
     IEvent --> EventTarget
-
     FieldCreator --> EventFactory: gets Event
     EventFactory ..> IEvent
     Field <.. FieldCreator
-
 %%    TrapEvent --> PlayerController: playerDecreaseHP()
 %%    HealEvent --> PlayerController: playerIncreaseHP()
 %%    TeleportEvent --> PlayerController: playerMove()
-    
+
 %%    PlayerController "triggerEvent" -->"handle()" IEvent: 
     EventTarget o--> PlayerController
     FieldView o-- Field
     FieldView ..|> IObserver
     Observable <|-- Field
+    IInput ..> Controls
+    Game --> IInput
+    IInput <|.. KeyboardInput
+    IInput <|.. FileInput
+    ControlScheme .. Controls
 
+```
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant GameMenu
+    participant Input
+    participant Game
+    participant Controller
+    participant Model
+    participant View
+    User ->> GameMenu: run program
+    GameMenu ->> GameMenuView: ...
+    GameMenuView -->> User: Show interface
+    User ->> GameMenu: start level
+    GameMenu ->> Game: ...
+    loop name
+        Game ->>+ Input: await from user
+        Input ->>+ User: await from user
+        User ->>+ Input: sends command
+        Input ->>+ Game: parses input command
+        deactivate Input
+        activate Game
+        Game ->>+ Controller: runs method of Contoroller<br> by selectd Command
+        Controller ->>+ Model: change model
+        Model ->>+ View: notifyUpdate
+        View -->>- User: rerender view
+        deactivate Controller
+        deactivate Model
+        deactivate Game
+
+        break Quit from program
+            Game --x GameMenu: Close
+
+
+        end
+        deactivate Game
+
+    end
+
+    opt Close programm
+        User ->> GameMenu: Send command "Close"
+        GameMenu --x User: Stop program
+    end
 ```

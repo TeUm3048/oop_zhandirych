@@ -17,7 +17,6 @@ public:
 //  to prevent implicit conversions from the `Player` class to `PlayerController`.
 //  This means that when creating a `PlayerController` object,
 //  you must explicitly pass a `Player` object as an argument to the constructor.
-
     explicit PlayerController(Player &player);
 
     explicit PlayerController(Player &player, Field &field);

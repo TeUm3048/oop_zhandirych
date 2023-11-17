@@ -1,8 +1,7 @@
-#include "Player/Player.h"
-#include "PlayerView/PlayerView.h"
-#include "PlayerController/PlayerController.h"
-#include "FieldCreator/FieldCreator.h"
-void updateLocale() ;
+#include "Game/Game.h"
+#include "GameMenu/GameMenu.h"
+
+void updateLocale();
 
 #ifdef _WIN32
 
@@ -23,14 +22,9 @@ void updateLocale() {
 int main(int argc, char const *argv[]) {
 
     updateLocale();
-    Player player;
-    FieldCreator fieldCreator;
-    Field field = fieldCreator.createFieldForLevel(2);
-    PlayerView view(player);
-    PlayerController controller(player, field);
 
-    controller.start();
-
+    GameMenu menu;
+    menu.start();
 
     return 0;
 }
