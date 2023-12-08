@@ -17,7 +17,7 @@ void HealEvent::handle(EventTarget &eventTarget) {
     eventTarget.controller.playerIncreaseHP(heal_hp);
     --numberOfUses;
     if (numberOfUses == 0)
-        eventTarget.field.getFieldCell(eventTarget.coord).setEvent(nullptr);
+        eventTarget.field.setEvent(eventTarget.coord, nullptr);
 }
 
 IEvent *HealEvent::clone() {

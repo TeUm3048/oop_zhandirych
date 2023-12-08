@@ -10,7 +10,7 @@
 #include "../IObserver/IObserver.h"
 #include "../Player/Player.h"
 
-class FieldView : public IObserver {
+class FieldView : public IObserver, public Observable {
 public:
     explicit FieldView(Field &field, Player &player);
 
@@ -20,9 +20,12 @@ public:
 
     void update() override;
 
+    const std::string &getFieldString();
+
 private:
     Field &field;
     Player &player;
+    std::string field_str_view;
 };
 
 

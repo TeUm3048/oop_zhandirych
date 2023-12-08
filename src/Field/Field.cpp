@@ -115,3 +115,8 @@ Coordinate Field::getStart() {
 Coordinate Field::getFinish() {
     return finish;
 }
+
+void Field::setEvent(Coordinate coord, IEvent *event) {
+    this->getFieldCell(coord).setEvent(event);
+    notifyUpdate();
+}

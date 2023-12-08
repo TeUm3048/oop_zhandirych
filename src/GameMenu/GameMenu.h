@@ -10,7 +10,9 @@
 
 class GameMenu {
     Game game;
+    IInput *input{};
 public:
+    explicit GameMenu(IInput *input);
 
     void start() {
         std::string level;
@@ -18,6 +20,7 @@ public:
         std::cout << "Чтобы выйти нажмите q" << std::endl;
         std::cin >> level;
         while (level != "q") {
+
             game.switchLevel(std::stoi(level));
             game.startGame();
             std::cout << "Выберите уровень:" << std::endl;

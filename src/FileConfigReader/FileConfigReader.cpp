@@ -3,37 +3,32 @@
 //
 
 #include <vector>
-#include <fstream>
-#include <iostream>
 #include <algorithm>
-#include <conio.h>
-#include "KeyboardInput.h"
-#include "../FileConfigReader//FileConfigReader.h"
+#include "FileConfigReader.h"
 
-//KeyboardInput::KeyboardInput(const std::string &filename) {
-//    keyboardLayoutMap = createKeyboardLayoutMap(filename);
-//}
+FileConfigReader::FileConfigReader(const std::string &fileName) : file{
+        fileName} {
 
-KeyboardInput::KeyboardInput(
-        ControlMap &keyboardLayoutMap_)
-        : keyboardLayoutMap(keyboardLayoutMap_) {
 }
 
-Controls KeyboardInput::read() {
-    int c = getch();
-    if (keyboardLayoutMap.find(c) == keyboardLayoutMap.end())
-        return Controls::NOT_FOUND;
-    return keyboardLayoutMap[c];
+FileConfigReader::~FileConfigReader() {
+    if (file.is_open()) {
+        file.close();
+    }
 }
 
-ControlMap
-KeyboardInput::createKeyboardLayoutMap(const std::string &filename) {
+bool FileConfigReader::readLine(std::string &line) {
+    if (std::getline(file, line)) {
+        return true;
+    }
+    return false;
+}
+
+ControlMap FileConfigReader::readConfig() {
     ControlMap dictionary;
-    FileConfigReader fileReader(filename);
-    std::ifstream input_file(filename);
 
     // Perform dictionary from file
-    for (std::string line; fileReader.readLine(line);) {
+    for (std::string line; this->readLine(line);) {
         size_t space_pos = line.find(' ');
         if (space_pos == std::string::npos) {
             throw std::runtime_error(
@@ -62,6 +57,7 @@ KeyboardInput::createKeyboardLayoutMap(const std::string &filename) {
     return dictionary;
 }
 
-
-
+bool FileConfigReader::is_open() {
+    return file.is_open();
+}
 

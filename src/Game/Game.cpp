@@ -4,9 +4,11 @@
 
 #include "Game.h"
 
-Game::Game() : level(1), win(false), loose(false), view(player),
-               controller(player, field),
-               fieldView(field, player) {}
+Game::Game(IInput *input_) : level(1), win(false), loose(false),
+                             playerView(player),
+                             controller(player, field),
+                             fieldView(field, player), input(input_),
+                             levelView(fieldView, playerView) {}
 
 
 void Game::switchLevel(int level_) {
@@ -22,20 +24,12 @@ void Game::startGame() {
 }
 
 void Game::runControlPlayer() {
-//    IInput *input = nullptr;
-    try {
-        input = new KeyboardInput("../input.txt");
-    } catch (std::runtime_error &e) {
-        std::cout << e.what();
-        return;
-    }
+
     if (input == nullptr)
         return;
-//    Field field;
-//    Player player;
-//    PlayerController controller(player, field);
-//    FieldView fieldView(field, player);
-//    FieldView fieldView(field, player);
+    levelView.renderLevel();
+    levelView.showLevel();
+
     Controls command = input->read();
     while (Controls::QUIT != command) {
         switch (command) {
@@ -54,8 +48,7 @@ void Game::runControlPlayer() {
             default:
                 break;
         }
-//        system("cls");
-        std::cout << fieldView.renderField();
+//        std::cout << fieldView.renderField();
 
         loose = isLoose();
         if (loose) break;

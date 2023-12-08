@@ -9,20 +9,20 @@
 #include <map>
 #include <string>
 #include "../IInput/IInput.h"
+#include "../Controls/ControlMap.h"
 
 class KeyboardInput : public IInput {
-    using KeyboardLayoutMap = std::map<int, Controls>;
 public:
-    explicit KeyboardInput(const std::string &filename);
+//    explicit KeyboardInput(const std::string &filename);
 
-    ~KeyboardInput() = default;
+    explicit KeyboardInput(ControlMap &keyboardLayoutMap);
 
     Controls read() override;
 
 private:
-    KeyboardLayoutMap keyboardLayoutMap;
+    ControlMap &keyboardLayoutMap;
 
-    static KeyboardLayoutMap
+    static ControlMap
     createKeyboardLayoutMap(const std::string &filename);
 };
 

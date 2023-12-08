@@ -12,6 +12,7 @@ enum Controls {
     MOVE_RIGHT = 1,
     MOVE_DOWN = 2,
     MOVE_LEFT = 3,
+    NOT_FOUND
 };
 
 

@@ -15,7 +15,7 @@
 #define MAX_WIDTH 200
 #define MAX_HEIGHT 200
 #define DEFAULT_START {0, 0}
-#define DEFAULT_FINISH {19, 19}
+#define DEFAULT_FINISH {19, 18}
 
 class Field : public Observable {
 private:
@@ -41,7 +41,7 @@ public:
 
     Field &operator=(Field &&other) noexcept;
 
-    void swap(Field& other) noexcept;
+    void swap(Field &other) noexcept;
 
     [[nodiscard]] unsigned getWidth() const;
 
@@ -61,6 +61,8 @@ public:
     [[nodiscard]] Coordinate getStart();
 
     [[nodiscard]] Coordinate getFinish();
+
+    void setEvent(Coordinate coord, IEvent *event);
 
 };
 

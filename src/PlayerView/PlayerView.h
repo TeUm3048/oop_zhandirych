@@ -6,16 +6,20 @@
 #include "../IObserver/IObserver.h"
 #include "../Player/Player.h"
 
-class PlayerView : IObserver {
+class PlayerView : public IObserver, public Observable {
 private:
     Player &_player;
 
+    std::string player_str_view;
 public:
     //    The `explicit` keyword is used to prevent implicit conversions.
 
     explicit PlayerView(Player &player);
 
+
     ~PlayerView();
+
+    const std::string & getPlayerString();
 
     // The `override` keyword is used to explicitly indicate that a member function
     // is intended to override a virtual function from a base class.
@@ -26,7 +30,7 @@ public:
 
     void update() override;
 
-    void renderPlayer();
+    std::string renderPlayer();
 };
 
 

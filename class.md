@@ -201,7 +201,7 @@ sequenceDiagram
         Game ->>+ Controller: runs method of Contoroller<br> by selectd Command
         Controller ->>+ Model: change model
         Model ->>+ View: notifyUpdate
-        View -->>- User: rerender view
+        View -->>- User: rerender playerView
         deactivate Controller
         deactivate Model
         deactivate Game

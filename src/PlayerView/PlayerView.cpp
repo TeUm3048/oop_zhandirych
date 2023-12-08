@@ -10,15 +10,20 @@ PlayerView::PlayerView(Player &player) : _player(player) {
 
 PlayerView::~PlayerView() = default;
 
-void PlayerView::renderPlayer() {
-    system("cls");
-    std::cout << "Player: " << _player.getName() << std::endl;
-    std::cout << "Player position:" << std::endl;
-    std::cout << "\t X:" << _player.getX() << std::endl;
-    std::cout << "\t Y:" << _player.getY() << std::endl;
-    std::cout << "HP: " << _player.getHP() << "\n";
+std::string PlayerView::renderPlayer() {
+    std::string buffer = "Player: " + _player.getName() + "\n" +
+                         "Player position:" + "\n" +
+                         "\t X:" + std::to_string(_player.getX()) + "\n" +
+                         "\t Y:" + std::to_string(_player.getY()) + "\n" +
+                         "HP: " + std::to_string(_player.getHP()) + "\n";
+    return buffer;
 }
 
 void PlayerView::update() {
-    PlayerView::renderPlayer();
+    player_str_view = renderPlayer();
+    this->notifyUpdate();
+}
+
+const std::string &PlayerView::getPlayerString() {
+    return player_str_view;
 }

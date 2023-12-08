@@ -4,6 +4,10 @@
 
 #include <iostream>
 #include "FieldView.h"
+#include "../Events/HealEvent/HealEvent.h"
+#include "../Events/TrapEvent/TrapEvent.h"
+#include "../Events/TeleportEvent/TeleportEvent.h"
+
 
 FieldView::FieldView(Field &field_, Player &player_) : field(field_),
                                                        player(player_) {
@@ -12,9 +16,16 @@ FieldView::FieldView(Field &field_, Player &player_) : field(field_),
 }
 
 std::string FieldView::renderCell(FieldCell &cell) {
+    IEvent *event = cell.getEvent();
+    if (auto *heal = dynamic_cast<HealEvent *>(event))
+        return "[+]";
+    if (auto *trap = dynamic_cast<TrapEvent *>(event))
+        return "[.]";
+    if (auto *tp = dynamic_cast<TeleportEvent *>(event))
+        return "[0]";
     if (cell.isOccupied())
         return "[X]";
-    else return "[ ]";
+    return "[ ]";
 }
 
 std::string FieldView::renderField() {
@@ -72,5 +83,10 @@ std::string FieldView::renderField() {
 }
 
 void FieldView::update() {
-//    std::cout << renderField();
+    field_str_view = renderField();
+    this->notifyUpdate();
+}
+
+const std::string &FieldView::getFieldString() {
+    return field_str_view;
 }

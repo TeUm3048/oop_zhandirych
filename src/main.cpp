@@ -1,5 +1,6 @@
 #include "Game/Game.h"
 #include "GameMenu/GameMenu.h"
+#include "FileConfigReader/FileConfigReader.h"
 
 void updateLocale();
 
@@ -14,16 +15,35 @@ void updateLocale() {
 }
 
 #elif __linux__
+
 void updateLocale() {
     std::setlocale(LC_ALL, "ru_RU.UTF8");
 }
+
 #endif
 
 int main(int argc, char const *argv[]) {
-
     updateLocale();
 
-    GameMenu menu;
+    std::string fileName = "../input.txt";
+    FileConfigReader fileConfigReader(fileName);
+    if (!fileConfigReader.is_open()) {
+        std::cout << "Could not open file: " << fileName;
+        return 0;
+    }
+
+    ControlMap keyBoardLayout;
+    try {
+        keyBoardLayout = fileConfigReader.readConfig();
+    } catch (const std::exception &e) {
+        std::cout << e.what();
+        return 0;
+    }
+
+    IInput *input = new KeyboardInput(keyBoardLayout);
+
+
+    GameMenu menu(input);
     menu.start();
 
     return 0;

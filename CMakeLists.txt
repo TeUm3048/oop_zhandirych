@@ -7,7 +7,6 @@ add_executable(OOP
         src/PlayerView/PlayerView.h
         src/PlayerView/PlayerView.cpp
         src/PlayerController/PlayerController.h
-        src/IObserver/IObserver.cpp
         src/IObserver/IObserver.h
         src/Observable/Observable.cpp
         src/Observable/Observable.h
@@ -45,7 +44,13 @@ add_executable(OOP
         src/Controls/Controls.h
         src/KeyboardInput/KeyboardInput.cpp
         src/KeyboardInput/KeyboardInput.h
-        src/utils/FileReader.cpp
-        src/utils/FileReader.h
+        src/FileConfigReader/FileConfigReader.cpp
+        src/FileConfigReader/FileConfigReader.h
         input.txt
+        src/Controls/ControlMap.h
+        src/IConfigReader/IConfigReader.h
+        src/FileConfigReader/FileConfigReader.cpp
+        src/FileConfigReader/FileConfigReader.h
+        src/LevelView/LevelView.cpp
+        src/LevelView/LevelView.h
 )

@@ -16,27 +16,28 @@
 #include "../FieldCreator/FieldCreator.h"
 #include "../KeyboardInput/KeyboardInput.h"
 #include "../FieldView/FieldView.h"
+#include "../LevelView/LevelView.h"
 
 class Game {
 public:
-    Game();
+    explicit Game(IInput *input);
 
     void startGame();
 
     void switchLevel(int level_);
-
-private:
 
     int level;
     bool win;
     bool loose;
     Player player;
     Field field;
-    PlayerView view;
+    PlayerView playerView;
     PlayerController controller;
     FieldCreator fieldCreator;
-    IInput *input = nullptr;
+    IInput *input;
     FieldView fieldView;
+    LevelView levelView;
+private:
 
 
     void runControlPlayer();
